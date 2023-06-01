@@ -2,13 +2,13 @@ const data = require('../data/zoo_data');
 
 const { species, employees } = data;
 
-const findEmployeeId = (id) =>
-  employees.find((emp) => emp.id === id);
-
-const findEmployeeName = (name) =>
+const findEmployeeByName = (name) =>
   employees.find((emp) => emp.firstName === name || emp.lastName === name);
 
-const getEmployeeCoverage = () => {
+const findEmployeeById = (id) =>
+  employees.find((emp) => emp.id === id);
+
+const getEmployeeCoverage = () =>
   employees.reduce((result, employee) => {
     const { id, firstName, lastName, responsibleFor } = employee;
     const fullName = `${firstName} ${lastName}`;
@@ -27,7 +27,6 @@ const getEmployeeCoverage = () => {
     result.push(employeeData);
     return result;
   }, []);
-};
 
 const getEmployeeData = (employee) => {
   const employeeSpecies = species
@@ -52,9 +51,9 @@ const getEmployeesCoverage = (obj) => {
   }
   let employee;
   if (obj.name) {
-    employee = findEmployeeName(obj.name);
+    employee = findEmployeeByName(obj.name);
   } else {
-    employee = findEmployeeId(obj.id);
+    employee = findEmployeeById(obj.id);
   }
   if (!employee) {
     throw new Error('Informações inválidas');
