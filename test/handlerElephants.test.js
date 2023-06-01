@@ -23,7 +23,7 @@ describe('Testes da função HandlerElephants', () => {
   });
   it('Retorna popularidade igual ou maior a 5 para o argumento "popularity"', () => {
     const resultado = handlerElephants('popularity');
-    expect(resultado).toBeGreaterThanOrEqual(5);
+    expect(resultado).toBe(5);
   });
   it('Retorna a string "Parâmetro inválido, é necessário uma string" quando o argumento for um objeto vazio ', () => {
     const resultado = handlerElephants({});
@@ -32,5 +32,17 @@ describe('Testes da função HandlerElephants', () => {
   it('Retorna null quando um argumento inválido é fornecido', () => {
     const resultado = handlerElephants('invalidArgument');
     expect(resultado).toBeNull();
+  });
+  it('Retorna undefined quando a função é chamada sem argumento', () => {
+    const resultado = handlerElephants();
+    expect(resultado).toBeUndefined();
+  });
+  it('Retorna se "residents" dos elefantes é um objeto', () => {
+    const resultado = handlerElephants('residents');
+    expect(resultado).toBeInstanceOf(Object);
+  });
+  it('Retorna um array que não contém "Thursday" para o argumento "availability"', () => {
+    const resultado = handlerElephants('availability');
+    expect(resultado).not.toContain('Thursday');
   });
 });
